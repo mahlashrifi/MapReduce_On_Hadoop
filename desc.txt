@@ -1,0 +1,34 @@
+open bash of container:
+docker exec -it <container_name> bash
+
+which process is listening to specify port:(for example 80)
+netstat -aon | findstr ":80" | findstr "LISTENING"
+
+
+all process prots:
+netstat -aon| find "LIST":
+
+
+just name node because of using port with other process was not running. link below helped :
+https://stackoverflow.com/questions/65272764/ports-are-not-available-listen-tcp-0-0-0-0-50070-bind-an-attempt-was-made-to
+
+
+
+hdfs dfs -mkdir <folder-path>
+hdfs dfs -put <local_path> <hdfs_path>
+hdfs dfs -put data.txt /user/hadoop/
+hdfs dfs -ls /
+
+transfer file from system to docker container:
+docker cp <local_path> <container_name_or_id>:<container_path>
+example => docker cp data.txt my-container:/app/
+
+python3 /root/Q1.py -r hadoop hdfs:///input/dataset.csv --output-dir hdfs:///output
+
+docker cp Code.py namenode:/root
+docker exec -it namenode bash
+
+python3 /root/Code.py -r hadoop hdfs:///input/dataset.csv --output-dir hdfs:///output/Code
+
+hdfs dfs -cat hdfs:///output/Code/part-00000
+rm /root/Code.py
